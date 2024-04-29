@@ -1,0 +1,34 @@
+### Get the 25 Latest Messages by Proposal ID
+# Replace `:proposalId` with the actual proposal ID you wish to query
+GET http://localhost:3000/api/messages/66300581f756b8ff1c9276ce
+Accept: application/json
+
+### Get All Messages by Proposal ID
+# Replace `:proposalId` with the actual proposal ID you wish to query
+GET http://localhost:3000/api/messages/all/66300581f756b8ff1c9276ce
+Accept: application/json
+
+### Post a New Message
+POST http://localhost:3000/api/messages/
+Content-Type: application/json
+
+{
+    "message": "New message content",
+    "date": "2021-01-01T00:00:00.000Z",
+    "senderKeyImage": "senderKeyImage",
+    "proposalId": "66300581f756b8ff1c9276ce"
+}
+
+### Modify a Message
+# Replace `:id` with the actual message ID you wish to modify
+PATCH http://localhost:3000/api/messages/6630067df756b8ff1c9276d1
+Content-Type: application/json
+
+{
+  "message": "Updated message content"
+}
+
+### Delete a Message
+# Replace `:id` with the actual message ID you wish to delete
+DELETE http://localhost:3000/api/messages/6630067df756b8ff1c9276d1
+Accept: application/json

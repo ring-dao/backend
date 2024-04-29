@@ -1,0 +1,36 @@
+### Get All Topics
+GET http://localhost:3000/api/topics/
+Accept: application/json
+
+### Get a Topic by ID
+# Replace `:id` with the actual topic ID you wish to retrieve
+GET http://localhost:3000/api/topics/6630048d94d91067d22b5b7a
+Accept: application/json
+
+### Post a New Topic
+POST http://localhost:3000/api/topics/
+Content-Type: application/json
+
+{
+  "title": "New Topic Name",
+  "date": "2021-01-01",
+  "senderKeyImage": "https://www.example.com/image.jpg",
+  "likes": "0",
+  "dislikes": "0",
+  "description": "Description of the topic"
+}
+
+### Delete a Topic
+# Replace `:id` with the actual topic ID you wish to delete
+DELETE http://localhost:3000/api/topics/6630048d94d91067d22b5b7a
+Accept: application/json
+
+### Modify a Topic
+# Replace `:id` with the actual topic ID you wish to modify
+PATCH http://localhost:3000/api/topics/6630048d94d91067d22b5b7a
+Content-Type: application/json
+
+{
+  "name": "Updated Topic Name",
+  "description": "Updated description of the topic"
+}
