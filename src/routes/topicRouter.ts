@@ -59,11 +59,11 @@ topicRouter.patch("/:id", async (req: Request, res: Response) => {
     try {
         const topic = await Topic.findById(req.params.id);
         await checkRingSignatureWithOwner(req.body.ringSignature, topic?.ownerkeyImage ?? "", tokenAddress);
-        await Topic.findByIdAndUpdate(req.params.id, req.body);
+        await Topic.findByIdAndUpdate(req.params.id, req.body.topic);
         await Topic.updateOne({
             _id: req.params.id
         }, {
-            $set: req.body
+            $set: req.body.topic
         });
         res.status(200).send("Topic updated");
     } catch (error) {

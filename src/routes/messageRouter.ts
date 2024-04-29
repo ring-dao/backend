@@ -38,7 +38,7 @@ messageRouter.post("/", async (req: Request, res: Response) => {
     try {
         await checkRingSignature(req.body.ringSignature, tokenAddress);
         // TODO need to check how we get the owner keyImage, directly in the payload or from the ring signature
-        const message = new RingDaoMessage(req.body);
+        const message = new RingDaoMessage(req.body.message);
         await message.save();
         res.status(201).send(message);
     } catch (error) {
@@ -51,11 +51,11 @@ messageRouter.patch("/:id", async (req: Request, res: Response) => {
     try {
         const message = await RingDaoMessage.findById(req.params.id);
         await checkRingSignatureWithOwner(req.body.ringSignature, message?.ownerKeyImage ?? "", tokenAddress);
-        await RingDaoMessage.findByIdAndUpdate(req.params.id, req.body);
+        await RingDaoMessage.findByIdAndUpdate(req.params.id, req.body.message);
         await RingDaoMessage.updateOne({
             _id: req.params.id
         }, {
-            $set: req.body
+            $set: req.body.message
         });
         res.status(200).send("Message updated");
     } catch (error) {
