@@ -1,11 +1,10 @@
-import e from 'express';
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Express } from 'express';
+import { connectToDatabase } from './utils';
+import router from './router';
+require('dotenv').config();
+
 const app: Express = express();
-
-// Body parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(bodyParser.raw({ limit: "50mb" }));
-
+app.use(express.json());
+connectToDatabase(process.env.DATABASE_URL ?? "");
+app.use(router);
 export default app;
