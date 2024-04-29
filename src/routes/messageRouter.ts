@@ -3,6 +3,8 @@ import express, {
     Response
 } from "express";
 import { RingDaoMessage } from "../models";
+import { checkRingSignature, checkRingSignatureWithOwner, tokenAddress } from "../utils";
+
 const messageRouter = express.Router();
 
 // Get the 25 latest messages based on proposalId
@@ -34,6 +36,8 @@ messageRouter.get("/all/:proposalId", async (req: Request, res: Response) => {
 // Post a new message
 messageRouter.post("/", async (req: Request, res: Response) => {
     try {
+        await checkRingSignature(req.body.ringSignature, tokenAddress);
+        // TODO need to check how we get the owner keyImage, directly in the payload or from the ring signature
         const message = new RingDaoMessage(req.body);
         await message.save();
         res.status(201).send(message);
@@ -45,6 +49,8 @@ messageRouter.post("/", async (req: Request, res: Response) => {
 // Modify a message
 messageRouter.patch("/:id", async (req: Request, res: Response) => {
     try {
+        const message = await RingDaoMessage.findById(req.params.id);
+        await checkRingSignatureWithOwner(req.body.ringSignature, message?.ownerKeyImage ?? "", tokenAddress);
         await RingDaoMessage.findByIdAndUpdate(req.params.id, req.body);
         await RingDaoMessage.updateOne({
             _id: req.params.id
@@ -60,6 +66,8 @@ messageRouter.patch("/:id", async (req: Request, res: Response) => {
 // Delete a message
 messageRouter.delete("/:id", async (req: Request, res: Response) => {
     try {
+        const message = await RingDaoMessage.findById(req.params.id);
+        await checkRingSignatureWithOwner(req.body.ringSignature, message?.ownerKeyImage ?? "", tokenAddress);
         await RingDaoMessage.findByIdAndDelete(req.params.id);
         res.status(200).send("Message deleted");
     } catch (error) {
