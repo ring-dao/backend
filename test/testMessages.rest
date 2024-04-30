@@ -8,7 +8,7 @@ Accept: application/json
 GET http://localhost:3000/api/messages/all/66300581f756b8ff1c9276ce
 Accept: application/json
 
-### Post a new Message
+### Post a n ew Message
 POST http://localhost:3000/api/messages/
 Content-Type: application/json
 
