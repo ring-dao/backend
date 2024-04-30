@@ -1,10 +1,10 @@
 ### Get All Topics
-GET http://localhost:3000/api/topics/
+GET http://localhost:3001/api/topics/
 Accept: application/json
 
 ### Get a Topic by ID
 # Replace `:id` with the actual topic ID you wish to retrieve
-GET http://localhost:3000/api/topics/6630048d94d91067d22b5b7a
+GET http://localhost:3001/api/topics/1
 Accept: application/json
 
 ### Post a New Topic

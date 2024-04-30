@@ -1,0 +1,28 @@
+# Utiliser une version allégée de Node
+FROM node:16-alpine
+
+# Définir les arguments qui seront utilisés pour passer les variables d'environnement lors de la construction
+ARG SECRET_DB_URL
+ARG PORT=3000
+
+# Définir les variables d'environnement
+ENV DB_URL=$SECRET_DB_URL
+
+
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers de package pour les dépendances
+COPY package.json package-lock.json ./
+
+# Installer les dépendances
+RUN npm install
+
+# Copier le reste des fichiers du projet dans le répertoire de travail du conteneur
+COPY . .
+
+# Exposer le port que l'application va utiliser
+EXPOSE $PORT
+
+# Définir la commande pour démarrer l'application
+CMD ["npm", "start"]

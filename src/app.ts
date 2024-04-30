@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const app: Express = express();
 app.use(express.json());
-connectToDatabase(process.env.DATABASE_URL ?? "");
+console.log(process.env.DB_URL);
+connectToDatabase(process.env.DB_URL ?? "");
 app.use(router);
 export default app;
