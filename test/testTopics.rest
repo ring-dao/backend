@@ -2,7 +2,7 @@
 GET http://localhost:3001/api/topics/
 Accept: application/json
 
-### Get a Topic by ID
+### Get a Topic by  ID
 # Replace `:id` with the actual topic ID you wish to retrieve
 GET http://localhost:3001/api/topics/1
 Accept: application/json
