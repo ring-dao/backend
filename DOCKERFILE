@@ -10,7 +10,7 @@ ENV DB_URL=$SECRET_DB_URL
 
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /app
+WORKDIR .
 
 # Copier les fichiers de package pour les dépendances
 COPY package.json package-lock.json ./
