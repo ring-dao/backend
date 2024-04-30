@@ -1,5 +1,5 @@
 # Utiliser une version allégée de Node
-FROM node:16-alpine
+FROM node:18-alpine
 
 # Définir les arguments qui seront utilisés pour passer les variables d'environnement lors de la construction
 ARG SECRET_DB_URL

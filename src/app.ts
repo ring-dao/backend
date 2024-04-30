@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import cors from 'cors'; // Import the cors module
+import cors from 'cors';
 import { connectToDatabase } from './utils';
 import router from './router';
 require('dotenv').config();
